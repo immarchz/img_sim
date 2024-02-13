@@ -90,12 +90,12 @@ def encoder_decoder_model():
 model = encoder_decoder_model()
 model.summary()
 
-optimizer = Adam(learning_rate=0.001)
+optimizer = Adam(learning_rate=1e-5)
 model = encoder_decoder_model()
 model.compile(optimizer=optimizer, loss='mse')
 early_stopping = EarlyStopping(monitor='val_loss', mode='min',verbose=1,patience=6,min_delta=0.0001)
-checkpoint = ModelCheckpoint('encoder_model.h5', monitor='val_loss', mode='min', save_best_only=True)
-history = model.fit(train_data, train_data, epochs=35, batch_size=32,validation_data=(test_data,test_data),callbacks=[early_stopping,checkpoint])
+checkpoint = ModelCheckpoint('encoder_model2.h5', monitor='val_loss', mode='min', save_best_only=True)
+history = model.fit(train_data, train_data, epochs=200, batch_size=4,validation_data=(test_data,test_data),callbacks=[early_stopping,checkpoint])
 
 # Plot training loss and validation loss
 plt.plot(history.history['loss'], label='Training Loss')
